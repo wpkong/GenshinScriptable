@@ -14,7 +14,6 @@
 // 组件基础类
 const RUNTIME_VERSION = 20201209
 
-
 const GenshinConfig = {
   Cookie: "__COOKIE__",
   UID: "__UID__",
@@ -1027,9 +1026,8 @@ class Widget extends Base {
     let recovery_txt = "";
     if (current_resin !== max_resin) {
       let resin_recovery_second = parseInt(data['resin_recovery_time'])
-      recovery_txt += "树脂 "
       recovery_txt += await this.beautifyTimeDelta(resin_recovery_second);
-      recovery_txt += " 恢复"
+      recovery_txt += "恢复"
     } else {
       recovery_txt = "树脂已满"
     }
@@ -1238,15 +1236,15 @@ class Widget extends Base {
     let current = new Date();
     let current_d = new Date(current)
     current_d.setHours(0, 0, 0, 0);
-    let tomorrow_d = new Date(current)
+    let tomorrow_d = new Date(current_d)
     tomorrow_d.setDate(tomorrow_d.getDate() + 1)
     let recovery = new Date(current.getTime() + delta_seconds * 1000);
     let recovery_d = new Date(recovery);
     recovery_d.setHours(0, 0, 0, 0);
     if (current_d.getTime() === recovery_d.getTime()) {
       txt = ""
-    } else if (current_d.getTime() === tomorrow_d.getTime()) {
-      txt = "明天 "
+    } else if (recovery_d.getTime() === tomorrow_d.getTime()) {
+      txt = "明天"
     } else {
       let days = ['日','一','二','三','四','五','六'];
       // const date_formatter = new DateFormatter();
